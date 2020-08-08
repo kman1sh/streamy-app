@@ -2,6 +2,9 @@ import React from "react";
 import { Field, reduxForm } from "redux-form";
 // Field is compoment: to defined types of field and other configurations.
 // reduxForm is function: kind of connect function from 'react-redux'
+import { connect } from "react-redux";
+
+import { createStream } from "../../actions";
 
 class StreamCreate extends React.Component {
   renderError({ error, touched }) {
@@ -33,9 +36,9 @@ class StreamCreate extends React.Component {
   };
 
   //this this onSumbit callback fn is now not pass into jsx onSumbit redirectly but we will pass it to the handleSumbit fn, provided by redux form props. no need to write event.preventDefault() or pass event obj inside onSubmit function.
-  onSubmit(formValues) {
-    console.log(formValues);
-  }
+  onSubmit = (formValues) => {
+    this.props.createStream(formValues);
+  };
   /* the field compoment has no idea how to render some type of input
         element, so it doesn't know how to show a text input or checkbox,
         dropdown menu etc. to do so we have to define a property called
@@ -81,7 +84,9 @@ const validate = (formValues) => {
   return errors;
 };
 
-export default reduxForm({
+const formWrapped = reduxForm({
   form: "streamCreate",
   validate: validate,
 })(StreamCreate);
+
+export default connect(null, { createStream: createStream })(formWrapped);
