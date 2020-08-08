@@ -50,6 +50,7 @@ class StreamCreate extends React.Component {
    * meta.touched show if user did any intraction with the input field or not. so touched props is set when user ne input enter krke, input field se bahar aa jaye.
    */
   render() {
+    console.log(this.props);
     return (
       <form
         onSubmit={this.props.handleSubmit(this.onSubmit)}

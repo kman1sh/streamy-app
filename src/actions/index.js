@@ -1,4 +1,5 @@
 import axiosStream from "../apis/axiosStreams";
+import history from "../history";
 import {
   SIGN_IN,
   SIGN_OUT,
@@ -31,6 +32,15 @@ export const createStream = (formValues) => {
       userId: getState().auth.userId,
     });
     dispatch({ type: CREATE_STREAM, payload: response.data });
+    /**
+     * after the successful network call to POST request and dispatching the action, we will route the user back to all Stream list page i.e homepage Problem
+     * with BrowerRouter is that it provide its own history object(keeps track of address bar for url) and very less option to have reference of this history object.
+     * when we visit a route path, BrowserRouter passes ref. of history obj to that routerPath component. from where it is very easy to edit history object to route
+     * user to different path.As we are not routing from a component but from a action creator, we need to have own "Router" instead of "BrowerRouter" and a own history object
+     * to be able access to access history object from anywhere.
+     */
+
+    history.push("/"); // redirect to root path after dispatching create Stream action.
   };
 };
 
@@ -44,15 +54,15 @@ export const fetchStreams = () => {
 
 export const fetchStream = (id) => async (dispatch) => {
   const response = await axiosStream.get(`/streams/${id}`);
-  dispatch({ type: FETCH_STREAM, playload: response.data });
+  dispatch({ type: FETCH_STREAM, payload: response.data });
 };
 
 export const editStream = (id, formValues) => async (dispatch) => {
   const response = await axiosStream.put(`/streams/${id}`, formValues);
-  dispatch({ type: EDIT_STREAM, playload: response.data });
+  dispatch({ type: EDIT_STREAM, payload: response.data });
 };
 
 export const deleteStream = (id) => async (dispatch) => {
   await axiosStream.delete(`/streams/${id}`); // no need of response, as response data will be empty.
-  dispatch({ type: DELETE_STREAM, playload: id });
+  dispatch({ type: DELETE_STREAM, payload: id });
 };
