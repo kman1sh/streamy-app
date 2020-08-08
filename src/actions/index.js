@@ -58,8 +58,9 @@ export const fetchStream = (id) => async (dispatch) => {
 };
 
 export const editStream = (id, formValues) => async (dispatch) => {
-  const response = await axiosStream.put(`/streams/${id}`, formValues);
+  const response = await axiosStream.patch(`/streams/${id}`, formValues);
   dispatch({ type: EDIT_STREAM, payload: response.data });
+  history.push("/"); // redirect to root path after dispatching create Stream action.
 };
 
 export const deleteStream = (id) => async (dispatch) => {
