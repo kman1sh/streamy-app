@@ -66,4 +66,5 @@ export const editStream = (id, formValues) => async (dispatch) => {
 export const deleteStream = (id) => async (dispatch) => {
   await axiosStream.delete(`/streams/${id}`); // no need of response, as response data will be empty.
   dispatch({ type: DELETE_STREAM, payload: id });
+  history.push("/");
 };
