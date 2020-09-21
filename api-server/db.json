@@ -1,0 +1,30 @@
+{
+  "streams": [
+    {
+      "title": "Anime show",
+      "description": "Anime show streaming",
+      "id": 1
+    },
+    {
+      "title": "Drawing live",
+      "description": "live stream of me drawing Mona Lisa",
+      "id": 2
+    },
+    {
+      "title": "Gaming Stream",
+      "description": "pubg stream by jackass John",
+      "id": 3
+    },
+    {
+      "title": "programmatic navigation",
+      "description": "routing to homepage by my own history object.EDITED",
+      "userId": "106696871865946032166",
+      "id": 5
+    },
+    {
+      "title": "using code reuse",
+      "description": "component refactored to reuse form.EDITED",
+      "id": 6
+    }
+  ]
+}
